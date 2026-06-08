@@ -129,6 +129,10 @@ Open **http://127.0.0.1:7878** for the dashboard.
 
 ### 4️⃣ Decorate your agent
 
+```bash
+pip install toran-sdk
+```
+
 ```python
 from toran import gate, configure
 
@@ -220,6 +224,12 @@ The bundled example policies cover common use cases:
 ---
 
 ## 🐍 The Python SDK
+
+Install from PyPI:
+
+```bash
+pip install toran-sdk
+```
 
 ```python
 from toran import gate, configure, BlockedError, DeniedError, TimeoutError
