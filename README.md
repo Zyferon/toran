@@ -41,6 +41,12 @@ send_email("stranger@evil.xyz", "Hi", "...")               # ⏸️  REQUIRE_APP
 send_email("ceo@x.com", "FREE MONEY winner!!!", "...")     # ⛔ BLOCK   — never sent
 ```
 
+**Install the SDK:**
+
+```bash
+pip install toran-sdk
+```
+
 ---
 
 ## 📑 Table of contents
