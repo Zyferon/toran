@@ -1,0 +1,18 @@
+toran.example.toml
+# Sample TOML config. Pass with `toran --config toran.toml start`.
+# All keys are optional; missing keys fall back to env or built-in defaults.
+
+socket_path     = "/tmp/toran.sock"
+api_bind        = "0.0.0.0:7878"
+policy_dir      = "./policies"
+database_path   = "./toran.db"
+default_action  = "ALLOW"
+max_connections = 10000
+max_suspended   = 10000
+default_timeout_secs = 300
+hmac_secret     = "rotate-me-please"
+log_level       = "info"
+
+# Notifications (optional)
+slack_webhook   = "https://hooks.slack.com/services/T000/B000/XXXXX"
+generic_webhook = "https://my-app.example.com/toran"

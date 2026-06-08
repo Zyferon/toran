@@ -1,0 +1,47 @@
+name: database-guardian
+description: |
+  Database write protections. Destructive operations always need
+  approval. Reads pass.
+default_action: ALLOW
+rules:
+  - name: block-drop-table
+    description: DROP TABLE is never allowed.
+    tool:
+      regex: '.*_write|execute_sql'
+    conditions:
+      - key: sql
+        op: regex
+        value: '(?i)\bdrop\s+table\b'
+    action: BLOCK
+    risk_score: 100
+
+  - name: require-approval-delete
+    description: DELETE statements need a human.
+    tool:
+      regex: '.*_write|execute_sql'
+    conditions:
+      - key: sql
+        op: regex
+        value: '(?i)\bdelete\s+from\b'
+    action: REQUIRE_APPROVAL
+    timeout_secs: 300
+    risk_score: 80
+
+  - name: require-approval-truncate
+    description: TRUNCATE needs a human.
+    tool:
+      regex: '.*_write|execute_sql'
+    conditions:
+      - key: sql
+        op: contains
+        value: TRUNCATE
+    action: REQUIRE_APPROVAL
+    timeout_secs: 300
+    risk_score: 90
+
+  - name: allow-reads
+    description: SELECTs pass without review.
+    tool:
+      glob: 'read_*'
+    action: ALLOW
+    risk_score: 5

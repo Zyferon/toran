@@ -1,0 +1,13 @@
+name: allow-everything
+description: |
+  Permissive policy. Every function call is allowed. Useful for
+  local development and demo mode. Intentionally low-priority
+  (-10) so the other, stricter policies win when they match.
+priority: -10
+default_action: ALLOW
+rules:
+  - name: allow-all-glob
+    tool:
+      glob: "*"
+    action: ALLOW
+    risk_score: 0

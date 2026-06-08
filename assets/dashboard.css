@@ -1,0 +1,53 @@
+/* Toran dashboard — minimal, dependency-free. */
+:root {
+  --bg: #0f1216;
+  --panel: #161b22;
+  --panel-2: #1f242c;
+  --fg: #e6edf3;
+  --muted: #8b949e;
+  --accent: #2f81f7;
+  --danger: #f85149;
+  --good: #3fb950;
+  --warn: #d29922;
+  --border: #30363d;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif; }
+header { padding: 24px 32px; border-bottom: 1px solid var(--border); }
+header h1 { margin: 0 0 4px; font-size: 22px; }
+header .tag { margin: 0; color: var(--muted); }
+header nav { margin-top: 12px; font-size: 14px; }
+header nav a { color: var(--accent); margin-right: 14px; text-decoration: none; }
+header nav a:hover { text-decoration: underline; }
+header nav a#start-tour { color: #facc15; }
+main { max-width: 1100px; margin: 0 auto; padding: 24px 32px; }
+section { background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+  padding: 20px 24px; margin-bottom: 18px; }
+section h2 { margin: 0 0 12px; font-size: 17px; }
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.card { background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 16px; text-align: center; }
+.card-num { font-size: 28px; font-weight: 600; }
+.card-lbl { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+table.queue { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.queue th, table.queue td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+table.queue th { color: var(--muted); font-weight: 500; }
+table.queue tr:hover td { background: rgba(47, 129, 247, 0.06); }
+.tag-risk { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+.tag-risk.low { background: rgba(63, 185, 80, 0.15); color: var(--good); }
+.tag-risk.med { background: rgba(210, 153, 34, 0.18); color: var(--warn); }
+.tag-risk.high { background: rgba(248, 81, 73, 0.18); color: var(--danger); }
+button { background: var(--accent); color: #fff; border: 0; padding: 6px 14px;
+  border-radius: 6px; cursor: pointer; font-size: 14px; margin-right: 6px; }
+button:hover { filter: brightness(1.1); }
+button.danger { background: var(--danger); }
+pre { background: var(--panel-2); padding: 12px; border-radius: 6px; overflow-x: auto;
+  border: 1px solid var(--border); }
+code { font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--panel-2);
+  padding: 1px 6px; border-radius: 4px; }
+.empty { color: var(--muted); font-style: italic; }
+.policy-card { background: var(--panel-2); border: 1px solid var(--border); border-radius: 6px;
+  padding: 12px 16px; margin-bottom: 10px; }
+.policy-card h3 { margin: 0 0 4px; font-size: 15px; }
+.policy-card .meta { color: var(--muted); font-size: 12px; }

@@ -1,0 +1,43 @@
+# cargo-deny configuration for Toran.
+# Run: cargo deny check
+# Docs: https://embarkstudios.github.io/cargo-deny/
+
+[graph]
+all-features = true
+
+[advisories]
+# Fail the build on any security advisory in the dependency tree.
+yanked = "deny"
+# Vulnerabilities are denied by default in cargo-deny 0.16+.
+
+[licenses]
+# Permissive and weak-copyleft licenses compatible with shipping Toran
+# under MIT. Every license present in the current dependency tree is
+# listed explicitly so a new transitive dep with an unexpected license
+# fails CI rather than slipping through.
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "MPL-2.0",
+    "Unicode-3.0",
+    "Unicode-DFS-2016",
+    "Zlib",
+    "CC0-1.0",
+]
+confidence-threshold = 0.8
+
+[bans]
+# Warn (don't fail) on multiple versions of the same crate; transitive
+# duplicates are common and not a security issue on their own.
+multiple-versions = "warn"
+wildcards = "deny"
+
+[sources]
+# Only allow crates from the canonical crates.io registry.
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]

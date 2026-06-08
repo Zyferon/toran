@@ -1,0 +1,59 @@
+name: email-guardian
+description: |
+  Email protections. Wire transfers and external domains require
+  explicit human approval. Internal emails to known addresses pass.
+default_action: ALLOW
+rules:
+  - name: block-known-spam-subjects
+    description: Hard-block obvious phishing/spam subject lines.
+    tool:
+      exact: send_email
+    conditions:
+      - key: subject
+        op: regex
+        value: '(?i)(viagra|free money|lottery winner)'
+    action: BLOCK
+    risk_score: 100
+
+  - name: require-approval-wire-transfer
+    description: Anything mentioning wire transfer needs human eyes.
+    tool:
+      exact: send_email
+    conditions:
+      - key: subject
+        op: contains
+        value: wire transfer
+    action: REQUIRE_APPROVAL
+    timeout_secs: 300
+    risk_score: 90
+
+  - name: require-approval-large-amount
+    description: Any mention of large dollar amounts requires approval.
+    tool:
+      exact: send_email
+    conditions:
+      - key: body
+        op: regex
+        value: '\$[0-9]{4,}'
+    action: REQUIRE_APPROVAL
+    timeout_secs: 300
+    risk_score: 85
+
+  - name: require-approval-external-tlds
+    description: TLDs outside the trusted list (com, edu, org) require approval.
+    tool:
+      exact: send_email
+    conditions:
+      - key: to
+        op: regex
+        value: '^[^@]+@[^@]+\.(io|xyz|top|click)$'
+    action: REQUIRE_APPROVAL
+    timeout_secs: 180
+    risk_score: 70
+
+  - name: allow-internal
+    description: Default pass for internal mail.
+    tool:
+      exact: send_email
+    action: ALLOW
+    risk_score: 10

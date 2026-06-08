@@ -1,0 +1,10 @@
+name: minimal
+description: Single-rule example used in the README quickstart.
+default_action: ALLOW
+rules:
+  - name: approve-emails
+    tool:
+      exact: send_email
+    action: REQUIRE_APPROVAL
+    timeout_secs: 300
+    risk_score: 70

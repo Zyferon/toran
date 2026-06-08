@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "toran-sdk"
+version = "0.1.1"
+description = "Runtime human-approval gatekeeper for AI agents"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Zyferon" }]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: POSIX",
+    "Operating System :: MacOS",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/Zyferon/toran"
+Repository = "https://github.com/Zyferon/toran"
+Issues = "https://github.com/Zyferon/toran/issues"
+Changelog = "https://github.com/Zyferon/toran/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-asyncio>=0.23",
+    "mypy>=1.7",
+    "ruff>=0.4",
+]
+
+[tool.setuptools.packages.find]
+where = ["sdk"]
+include = ["toran*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["sdk/tests", "tests"]

@@ -1,0 +1,45 @@
+name: financial-guardian
+description: |
+  Financial transaction protections. Any transfer over $1,000 USD
+  requires human approval.
+default_action: ALLOW
+rules:
+  - name: block-negative-amount
+    description: Negative amounts are always blocked.
+    tool:
+      glob: "transfer_*"
+    conditions:
+      - key: amount
+        op: lt
+        value: 0
+    action: BLOCK
+    risk_score: 100
+
+  - name: require-approval-large-transfer
+    description: USD transfers over $1,000 need a human.
+    tool:
+      glob: "transfer_*"
+    conditions:
+      - key: amount
+        op: gte
+        value: 1000
+      - key: currency
+        op: eq
+        value: USD
+    action: REQUIRE_APPROVAL
+    timeout_secs: 600
+    risk_score: 95
+
+  - name: allow-small-transfer
+    description: Small USD transfers pass.
+    tool:
+      glob: "transfer_*"
+    conditions:
+      - key: amount
+        op: lt
+        value: 1000
+      - key: currency
+        op: eq
+        value: USD
+    action: ALLOW
+    risk_score: 20

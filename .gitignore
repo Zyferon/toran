@@ -1,0 +1,27 @@
+# Rust
+/target
+
+# Local runtime state (may contain real approval data / tokens — never commit)
+*.db
+*.db-shm
+*.db-wal
+toran.db*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+.venv/
+venv/
+
+# Editor / OS
+.DS_Store
+*.swp
+
+# Archives
+*.zip
